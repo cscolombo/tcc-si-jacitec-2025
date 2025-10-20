@@ -130,4 +130,17 @@
     initControls();
     update();
   });
+
+  function boot(){
+    if (!window.TCC_DATA || !window.TCC_DATA.datas) {
+      // tenta de novo em 100ms até data.js estar carregado
+      setTimeout(boot, 100);
+      return;
+    }
+    initControls();
+    update();
+  }
+
+  document.addEventListener('DOMContentLoaded', boot);
+  
 })();
