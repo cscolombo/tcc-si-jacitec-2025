@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Programação de Pré-Defesas de TCC – SI/Ifes 2025</title>
+  <meta name="description" content="Programação das pré-defesas de TCC do Bacharelado em Sistemas de Informação – Ifes, integrada à JACITEC 2025." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="data.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <div class="branding">
+        <a class="brand-link" href="https://jacitec.cachoeiro.ifes.edu.br/" target="_blank" rel="noopener">
+          <img src="https://jacitec.cachoeiro.ifes.edu.br/assets/images/ifes.svg" alt="Ifes" class="ifes-logo" />
+          <div class="brand-text">
+            <div class="event-name">JACITEC 2025</div>
+            <h1 class="page-title">Programação de Pré-Defesas de TCC – SI/Ifes 2025</h1>
+          </div>
+        </a>
+      </div>
+      <nav class="actions">
+        <select id="dateFilter" class="select"></select>
+        <input type="search" id="searchBox" placeholder="Buscar por aluno, título, orientador..." class="search" />
+        <button id="exportPdfBtn" class="btn">Exportar PDF</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="hero" class="hero">
+      <img src="https://jacitec.cachoeiro.ifes.edu.br/assets/images/logo.png" alt="JACITEC" class="hero-logo"/>
+      <p class="hero-text">Acompanhe aqui a programação das pré-defesas do Bacharelado em Sistemas de Informação durante a XIV JACITEC (22–24/10/2025).</p>
+    </section>
+
+    <section id="stats" class="stats">
+      <div class="card">
+        <div class="card-label">Total de apresentações</div>
+        <div class="card-value" id="totalCount">—</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Primeira/Última</div>
+        <div class="card-value" id="timeSpan">—</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Orientadores distintos</div>
+        <div class="card-value" id="advisorCount">—</div>
+      </div>
+    </section>
+
+    <section id="schedule">
+      <div id="scheduleContainer" class="grid"></div>
+      <div id="emptyState" class="empty hide">
+        <p>Não há apresentações para esta data.</p>
+      </div>
+    </section>
+  </main>
+<!--
+  <footer class="site-footer">
+    <div class="container">
+      <p>Gerado em <span id="generatedAt">—</span>. Tema alinhado ao site da JACITEC/Ifes.</p>
+      <p>Este site se atualiza automaticamente quando novos CSVs são enviados à pasta <code>/data</code> do repositório (via GitHub Actions).</p>
+    </div>
+  </footer>
+-->
+
+</body>
+</html>
