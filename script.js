@@ -41,7 +41,17 @@
           <div class="meta">
             <span><strong>Aluno(a):</strong> ${item.aluno || '—'}</span>
             <span><strong>Orientador(a):</strong> ${item.orientador || '—'}</span>
+            <!--
             <span><strong>Banca:</strong> ${[item.revisor1,item.revisor2].filter(Boolean).join(' · ') || '—'}</span>
+            -->
+            <span><strong>Banca:</strong> ${
+              (() => {
+                const banca = [item.revisor1, item.revisor2].filter(Boolean);
+                if (banca.length === 2) return banca.join(' e ');
+                return banca.join('');
+              )() || '—'
+            }</span>
+
           </div>
         </div>`;
       frag.appendChild(card);
