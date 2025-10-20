@@ -8,11 +8,7 @@ window.TCC_DATA = {
         "titulo": "Uma Proposta de Ontologia no Domínio do Câncer \nde mama com enfoque nos fatores de risco",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
-        "revisor2": null,
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": null
       },
       {
         "data": "22/10/2025",
@@ -21,11 +17,7 @@ window.TCC_DATA = {
         "titulo": "Automação do Acesso a Informações de \nMedicamentos: Proposta de um Chatbot Baseado \nem Evidências Científicas",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
-        "revisor2": null,
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": null
       },
       {
         "data": "22/10/2025",
@@ -34,11 +26,7 @@ window.TCC_DATA = {
         "titulo": "Geração Automática de Questões para Certificação \nde Árbitros de Triathlon com Processamento de \nLinguagem Natural: Um Estudo Aplicado ao \nRegulamento da World Triathlon",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
-        "revisor2": null,
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": null
       },
       {
         "data": "22/10/2025",
@@ -47,11 +35,7 @@ window.TCC_DATA = {
         "titulo": "Linguagem Natural: Um Estudo Aplicado ao Regulamento da World Triathlon",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
-        "revisor2": null,
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": null
       },
       {
         "data": "22/10/2025",
@@ -60,11 +44,7 @@ window.TCC_DATA = {
         "titulo": "A definir",
         "orientador": "Cristiano",
         "revisor1": "Cristiano",
-        "revisor2": null,
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": null
       },
       {
         "data": "22/10/2025",
@@ -73,11 +53,7 @@ window.TCC_DATA = {
         "titulo": "Rastreamento  de Cadeia de Suprimentos Agricolas Usando a Tecnologia Blockchain",
         "orientador": "João Paulo",
         "revisor1": null,
-        "revisor2": null,
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": null
       },
       {
         "data": "22/10/2025",
@@ -86,11 +62,7 @@ window.TCC_DATA = {
         "titulo": "GERENCIADOR DE EFICIÊNCIA DE PRODUÇÃO EM PLACAS SOLARES COM SOLUÇÃO BLOCKCHAIN PARA NEGOCIAÇÃO DE EXCEDENTES",
         "orientador": "João Paulo",
         "revisor1": null,
-        "revisor2": null,
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": null
       },
       {
         "data": "22/10/2025",
@@ -99,11 +71,7 @@ window.TCC_DATA = {
         "titulo": "UMA SOLUÇÃO PARA AUXILIAR NA MOBILIDADE URBANA - SISTEMA DE CARONAS INTEGRADO COM BLOCKCHAIN",
         "orientador": "João Paulo",
         "revisor1": null,
-        "revisor2": null,
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": null
       },
       {
         "data": "22/10/2025",
@@ -112,11 +80,7 @@ window.TCC_DATA = {
         "titulo": "Shadow AI no desenvolvimento de software: Proposta de plataforma para capacitação segura em ia generativa",
         "orientador": "Susana",
         "revisor1": "Rafael V",
-        "revisor2": "Ricardo",
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": "Ricardo"
       },
       {
         "data": "22/10/2025",
@@ -125,11 +89,7 @@ window.TCC_DATA = {
         "titulo": "SISTEMA INTELIGENTE DE RECOMENDAÇÃO DE INVESTIMENTO BASEADO EM REDES NEURAIS",
         "orientador": "Susana",
         "revisor1": "Rafael V",
-        "revisor2": "Ricardo",
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": "Ricardo"
       },
       {
         "data": "22/10/2025",
@@ -138,11 +98,7 @@ window.TCC_DATA = {
         "titulo": "Desenvolvimento de um Sistema Inteligente para Monitoramento e Segurança em Rodovias Utilizando Visão Computacional",
         "orientador": "Ricardo",
         "revisor1": "Rafael V",
-        "revisor2": "Susana",
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": "Susana"
       },
       {
         "data": "22/10/2025",
@@ -151,11 +107,7 @@ window.TCC_DATA = {
         "titulo": "Análise de Toxicidade e Linguagem Inapropriada em Conteúdos Infantis",
         "orientador": "Rafael V",
         "revisor1": "Ricardo",
-        "revisor2": "Susana",
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": "Susana"
       },
       {
         "data": "22/10/2025",
@@ -164,11 +116,7 @@ window.TCC_DATA = {
         "titulo": "Utilização de Redes Neurais para Previsão de Vida Útil Remanescente de Equipamentos",
         "orientador": "Rafael V",
         "revisor1": "Ricardo",
-        "revisor2": "Susana",
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": "Susana"
       }
     ],
     "23/10/2025": [
@@ -179,11 +127,7 @@ window.TCC_DATA = {
         "titulo": "Aplicação de Rag na Consulta de Editais dos \nCursos Técnicos Integrados ao Ensino Médio do \nIfes - Campus Cachoeiro de Itapemirim",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
-        "revisor2": null,
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": null
       },
       {
         "data": "23/10/2025",
@@ -192,11 +136,7 @@ window.TCC_DATA = {
         "titulo": "Uma Abordagem Híbrida para o Reconhecimento de \nEntidades Nomeadas em Relatos de Casos Clínicos",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
-        "revisor2": "Rafael G",
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": "Rafael G"
       },
       {
         "data": "23/10/2025",
@@ -205,11 +145,7 @@ window.TCC_DATA = {
         "titulo": "Classificação de Sentimentos em Conteúdos Infantis do YouTube com a Abordagem Baseada em Modelos de Processamento de Linguagem Natural",
         "orientador": "Rafael V",
         "revisor1": "Flavio",
-        "revisor2": "Rafael G",
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": "Rafael G"
       },
       {
         "data": "23/10/2025",
@@ -218,11 +154,7 @@ window.TCC_DATA = {
         "titulo": "Otimização de Carteiras de Investimentos com Algoritmos Genéticos: Uma Abordagem para a Estratégia Buy and Hold",
         "orientador": "Rafael V",
         "revisor1": "Flavio",
-        "revisor2": "Lucas Poubel",
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": "Lucas Poubel"
       },
       {
         "data": "23/10/2025",
@@ -231,11 +163,7 @@ window.TCC_DATA = {
         "titulo": "APLICAÇÃO DE APRENDIZADO DE MÁQUINA PARA CLASSIFICAÇÃO DE FLUXOS DE REDES EM DISPOSITIVOS SD-WAN",
         "orientador": "Rafael G",
         "revisor1": "Everson",
-        "revisor2": "Bruno",
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": "Bruno"
       },
       {
         "data": "23/10/2025",
@@ -244,11 +172,7 @@ window.TCC_DATA = {
         "titulo": "REDES NEURAIS CONVOLUCIONAIS PARA SEGMENTAÇÃO E CLASSIFICAÇÃO DE ROCHAS ORNAMENTAIS",
         "orientador": "Rafael G",
         "revisor1": "Juliano",
-        "revisor2": null,
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": null
       },
       {
         "data": "23/10/2025",
@@ -257,11 +181,7 @@ window.TCC_DATA = {
         "titulo": "COMPARAÇÃO DOS PLANOS DE DADOS P4EMU E XDP DO SOFTWARE SWITCH\nFREERTR PARA REDES DEFINIDAS POR SOFTWARE (SDN)",
         "orientador": "Everson",
         "revisor1": "Rafael G",
-        "revisor2": null,
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": null
       },
       {
         "data": "23/10/2025",
@@ -270,11 +190,7 @@ window.TCC_DATA = {
         "titulo": "TECNOLOGIAS EDUCACIONAIS: O USO DA GAMIFICAÇÃO COMO FERRAMENTA DE APOIO À ALFABETIZAÇÃO DE JOVENS E ADULTOS",
         "orientador": "Emanoel",
         "revisor1": "Bruno",
-        "revisor2": null,
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": null
       },
       {
         "data": "23/10/2025",
@@ -283,13 +199,9 @@ window.TCC_DATA = {
         "titulo": null,
         "orientador": "Susana",
         "revisor1": "Emanoel",
-        "revisor2": "Bruno",
-        "nota_orientador": 0.0,
-        "nota_revisor1": 0.0,
-        "nota_revisor2": 0.0,
-        "media_total": 0.0
+        "revisor2": "Bruno"
       }
     ]
   },
-  "gerado_em": "2025-10-20 22:13:08"
+  "gerado_em": "2025-10-20 22:43:49"
 };

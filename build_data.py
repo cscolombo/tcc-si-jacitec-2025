@@ -8,14 +8,7 @@ def clean(x):
     s = str(x).strip()
     return s if s and s.lower()!="nan" else None
 
-def parse_nota(v):
-    v = clean(v)
-    if not v: return None
-    try: return float(v.replace(",", "."))
-    except: return None
-
 def normalize_headers(df):
-    # algumas exportações colocam os nomes "lógicos" na primeira linha; detecte e renomeie
     first_row = df.iloc[0]
     header_like = sum(isinstance(x, str) and x.strip() != "" for x in first_row)
     if header_like >= max(3, int(len(df.columns)*0.4)):
@@ -25,11 +18,9 @@ def normalize_headers(df):
     return df
 
 def read_csv_safely(path):
-    # tenta com utf-8-sig padrão
     try:
         return pd.read_csv(path, encoding="utf-8-sig")
     except Exception:
-        # tenta engine=python com sep autodetect
         return pd.read_csv(path, engine="python", sep=None)
 
 def parse_file(path, date_label):
@@ -42,9 +33,9 @@ def parse_file(path, date_label):
         hora = clean(row.get("Hora"))
         aluno = clean(row.get("Aluno"))
         titulo = clean(row.get("Título do trabalho")) or clean(row.get("Titulo do trabalho"))
-        orientador = clean(row.get("Nome\nOrientador")) or clean(row.get("Nome Orientador")) or clean(row.get("Orientador"))
-        r1 = clean(row.get("Nome\nRevisor 1")) or clean(row.get("Nome Revisor 1")) or clean(row.get("Revisor 1"))
-        r2 = clean(row.get("Nome\nRevisor 2")) or clean(row.get("Nome Revisor 2")) or clean(row.get("Revisor 2"))
+        orientador = clean(row.get("Nome\\nOrientador")) or clean(row.get("Nome Orientador")) or clean(row.get("Orientador"))
+        r1 = clean(row.get("Nome\\nRevisor 1")) or clean(row.get("Nome Revisor 1")) or clean(row.get("Revisor 1"))
+        r2 = clean(row.get("Nome\\nRevisor 2")) or clean(row.get("Nome Revisor 2")) or clean(row.get("Revisor 2"))
         if hora and (aluno or titulo):
             items.append({
                 "data": date_label,
@@ -53,24 +44,18 @@ def parse_file(path, date_label):
                 "titulo": titulo,
                 "orientador": orientador,
                 "revisor1": r1,
-                "revisor2": r2,
-                "nota_orientador": parse_nota(row.get("Nota Orientador")),
-                "nota_revisor1": parse_nota(row.get("Nota\nRevisor 1") or row.get("Nota Revisor 1")),
-                "nota_revisor2": parse_nota(row.get("Nota\nRevisor 2") or row.get("Nota Revisor 2")),
-                "media_total": parse_nota(row.get("Média Total") or row.get("Media Total")),
+                "revisor2": r2
             })
 
     def sort_key(e):
-        m = re.match(r"^(\d{1,2}):(\d{2})$", e["hora"] or "")
+        m = re.match(r"^(\\d{1,2}):(\\d{2})$", e["hora"] or "")
         return int(m.group(1))*60 + int(m.group(2)) if m else 99999
 
-    items = sorted(items, key=sort_key)
-    return items
+    return sorted(items, key=sort_key)
 
-# Descobre datas pelos nomes dos arquivos: 23_10_2025.csv -> 23/10/2025
 for fname in sorted(os.listdir(DATA_DIR)):
     if fname.lower().endswith(".csv"):
-        m = re.search(r"(\d{1,2})_(\d{1,2})_(\d{4})", fname)
+        m = re.search(r"(\\d{1,2})_(\\d{1,2})_(\\d{4})", fname)
         label = f"{m.group(1)}/{m.group(2)}/{m.group(3)}" if m else fname
         path = os.path.join(DATA_DIR, fname)
         try:
@@ -81,4 +66,4 @@ for fname in sorted(os.listdir(DATA_DIR)):
 
 with open("data.js", "w", encoding="utf-8") as f:
     f.write("window.TCC_DATA = " + json.dumps(out, ensure_ascii=False, indent=2) + ";\n")
-print("data.js gerado com sucesso.")
+print("data.js gerado sem campos de notas/média.")

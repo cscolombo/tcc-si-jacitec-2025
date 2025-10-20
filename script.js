@@ -1,40 +1,31 @@
 (function () {
   const $ = (sel, el = document) => el.querySelector(sel);
-  const safe = (el) => ({
-    set text(v) { if (el) el.textContent = v; },
-    get el() { return el; }
-  });
+  const safe = (el) => ({ set text(v){ if(el) el.textContent = v; } });
 
   const state = { date: null, q: '' };
+  const normalize = (s) => (s||'').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'');
 
-  const normalize = (str) =>
-    (str || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
-
-  function renderStats(list) {
+  function renderStats(list){
     safe($('#totalCount')).text = String(list.length);
-    if (list.length) {
-      const times = list.map(x => x.hora).filter(Boolean).sort();
-      safe($('#timeSpan')).text = `${times[0]} – ${times[times.length - 1]}`;
-      const advisors = new Set(list.map(x => x.orientador).filter(Boolean));
+    if(list.length){
+      const times = list.map(x=>x.hora).filter(Boolean).sort();
+      safe($('#timeSpan')).text = `${times[0]} – ${times[times.length-1]}`;
+      const advisors = new Set(list.map(x=>x.orientador).filter(Boolean));
       safe($('#advisorCount')).text = String(advisors.size);
-    } else {
+    }else{
       safe($('#timeSpan')).text = '—';
       safe($('#advisorCount')).text = '0';
     }
     safe($('#generatedAt')).text = (window.TCC_DATA?.gerado_em || '—');
   }
 
-  function renderCards(list) {
+  function renderCards(list){
     const cont = $('#scheduleContainer');
-    if (!cont) return;
+    if(!cont) return;
     cont.innerHTML = '';
     const empty = $('#emptyState');
-
-    if (!list.length) {
-      if (empty) empty.classList.remove('hide');
-      return;
-    }
-    if (empty) empty.classList.add('hide');
+    if(!list.length){ if(empty) empty.classList.remove('hide'); return; }
+    if(empty) empty.classList.add('hide');
 
     const frag = document.createDocumentFragment();
     list.forEach(item => {
@@ -50,67 +41,57 @@
           <div class="meta">
             <span><strong>Aluno(a):</strong> ${item.aluno || '—'}</span>
             <span><strong>Orientador(a):</strong> ${item.orientador || '—'}</span>
-            <span><strong>Banca:</strong> ${[item.revisor1, item.revisor2].filter(Boolean).join(' · ') || '—'}</span>
+            <span><strong>Banca:</strong> ${[item.revisor1,item.revisor2].filter(Boolean).join(' · ') || '—'}</span>
           </div>
-          ${(item.media_total ?? item.nota_orientador ?? item.nota_revisor1 ?? item.nota_revisor2) !== undefined ? `
-          <div class="meta" style="margin-top:.35rem">
-            <span><strong>Média:</strong> ${item.media_total ?? '—'}</span>
-            <span><strong>Notas:</strong> O ${item.nota_orientador ?? '—'} · R1 ${item.nota_revisor1 ?? '—'} · R2 ${item.nota_revisor2 ?? '—'}</span>
-          </div>` : ''}
-        </div>
-      `;
+        </div>`;
       frag.appendChild(card);
     });
     cont.appendChild(frag);
   }
 
-  function currentList() {
+  function currentList(){
     const raw = window.TCC_DATA?.datas?.[state.date] || [];
     const q = normalize(state.q);
-    if (!q) return raw;
+    if(!q) return raw;
     return raw.filter(it => {
-      const hay = [it.aluno, it.titulo, it.orientador, it.revisor1, it.revisor2]
-        .map(normalize).join(' ');
+      const hay = [it.aluno, it.titulo, it.orientador, it.revisor1, it.revisor2].map(normalize).join(' ');
       return hay.includes(q);
     });
   }
 
-  function update() {
+  function update(){
     const sel = $('#dateFilter');
-    if (sel && !state.date) {
-      const dates = Object.keys(window.TCC_DATA?.datas || {}).sort((a, b) => {
-        const [da, ma, ya] = a.split('/').map(Number);
-        const [db, mb, yb] = b.split('/').map(Number);
-        return new Date(ya, ma - 1, da) - new Date(yb, mb - 1, db);
+    if(sel && !state.date){
+      const dates = Object.keys(window.TCC_DATA?.datas || {}).sort((a,b)=>{
+        const [da,ma,ya] = a.split('/').map(Number);
+        const [db,mb,yb] = b.split('/').map(Number);
+        return new Date(ya,ma-1,da) - new Date(yb,mb-1,db);
       });
-      sel.innerHTML = dates.map(d => `<option value="${d}">${d}</option>`).join('');
+      sel.innerHTML = dates.map(d=>`<option value="${d}">${d}</option>`).join('');
       state.date = dates[0] || null;
       sel.value = state.date || '';
     }
-
     const list = currentList();
     renderStats(list);
     renderCards(list);
   }
 
-  function initControls() {
+  function initControls(){
     const sel = $('#dateFilter');
-    if (sel) sel.addEventListener('change', () => { state.date = sel.value; update(); });
+    if(sel) sel.addEventListener('change', ()=>{ state.date = sel.value; update(); });
     const search = $('#searchBox');
-    if (search) search.addEventListener('input', (e) => { state.q = e.target.value; update(); });
-
+    if(search) search.addEventListener('input', e=>{ state.q = e.target.value; update(); });
     const pdfBtn = $('#exportPdfBtn');
-    if (pdfBtn) pdfBtn.addEventListener('click', async () => {
+    if(pdfBtn) pdfBtn.addEventListener('click', async () => {
       const { jsPDF } = window.jspdf;
       const container = document.querySelector('main');
       const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'pt', 'a4');
+      const pdf = new jsPDF('p','pt','a4');
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
       const imgWidth = pageWidth - 40;
       const imgHeight = canvas.height * imgWidth / canvas.width;
-
       if (imgHeight <= pageHeight - 40) {
         pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight);
       } else {
@@ -129,18 +110,17 @@
           if (position < canvas.height) pdf.addPage();
         }
       }
-      const dateSlug = (state.date || 'tcc').replace(/\//g, '-');
+      const dateSlug = (state.date || 'tcc').replace(/\//g,'-');
       pdf.save(`programacao_tcc_${dateSlug}.pdf`);
     });
   }
 
-  function boot() {
-    if (!window.TCC_DATA || !window.TCC_DATA.datas) {
-      setTimeout(boot, 100);
+  function boot(){
+    if(!window.TCC_DATA || !window.TCC_DATA.datas){
+      setTimeout(boot, 80);
       return;
     }
-    initControls();
-    update();
+    initControls(); update();
   }
 
   document.addEventListener('DOMContentLoaded', boot);
