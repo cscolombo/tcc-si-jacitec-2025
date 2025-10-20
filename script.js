@@ -26,9 +26,10 @@
 
   function renderCards(list) {
     const cont = $('#scheduleContainer');
-    if (!cont) return; // safety
+    if (!cont) return;
     cont.innerHTML = '';
     const empty = $('#emptyState');
+
     if (!list.length) {
       if (empty) empty.classList.remove('hide');
       return;
@@ -75,7 +76,6 @@
   }
 
   function update() {
-    // hidrata o seletor de datas uma única vez
     const sel = $('#dateFilter');
     if (sel && !state.date) {
       const dates = Object.keys(window.TCC_DATA?.datas || {}).sort((a, b) => {
@@ -134,7 +134,6 @@
     });
   }
 
-  // só inicia quando o data.js estiver disponível
   function boot() {
     if (!window.TCC_DATA || !window.TCC_DATA.datas) {
       setTimeout(boot, 100);
