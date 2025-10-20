@@ -1,32 +1,40 @@
-(function(){
-  const $ = (sel, el=document) => el.querySelector(sel);
+(function () {
+  const $ = (sel, el = document) => el.querySelector(sel);
+  const safe = (el) => ({
+    set text(v) { if (el) el.textContent = v; },
+    get el() { return el; }
+  });
 
   const state = { date: null, q: '' };
 
-  function normalize(str){ return (str || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,''); }
+  const normalize = (str) =>
+    (str || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
 
-  function renderStats(list){
-    $('#totalCount').textContent = list.length.toString();
-    if(list.length){
-      const times = list.map(x=>x.hora).filter(Boolean).sort();
-      $('#timeSpan').textContent = `${times[0]} – ${times[times.length-1]}`;
-      const advisors = new Set(list.map(x=>x.orientador).filter(Boolean));
-      $('#advisorCount').textContent = advisors.size.toString();
-    }else{
-      $('#timeSpan').textContent = '—';
-      $('#advisorCount').textContent = '0';
+  function renderStats(list) {
+    safe($('#totalCount')).text = String(list.length);
+    if (list.length) {
+      const times = list.map(x => x.hora).filter(Boolean).sort();
+      safe($('#timeSpan')).text = `${times[0]} – ${times[times.length - 1]}`;
+      const advisors = new Set(list.map(x => x.orientador).filter(Boolean));
+      safe($('#advisorCount')).text = String(advisors.size);
+    } else {
+      safe($('#timeSpan')).text = '—';
+      safe($('#advisorCount')).text = '0';
     }
-    $('#generatedAt').textContent = (window.TCC_DATA?.gerado_em || '—');
+    safe($('#generatedAt')).text = (window.TCC_DATA?.gerado_em || '—');
   }
 
-  function renderCards(list){
+  function renderCards(list) {
     const cont = $('#scheduleContainer');
+    if (!cont) return; // safety
     cont.innerHTML = '';
-    if(!list.length){
-      $('#emptyState').classList.remove('hide');
+    const empty = $('#emptyState');
+    if (!list.length) {
+      if (empty) empty.classList.remove('hide');
       return;
     }
-    $('#emptyState').classList.add('hide');
+    if (empty) empty.classList.add('hide');
+
     const frag = document.createDocumentFragment();
     list.forEach(item => {
       const card = document.createElement('article');
@@ -41,9 +49,9 @@
           <div class="meta">
             <span><strong>Aluno(a):</strong> ${item.aluno || '—'}</span>
             <span><strong>Orientador(a):</strong> ${item.orientador || '—'}</span>
-            <span><strong>Banca:</strong> ${[item.revisor1,item.revisor2].filter(Boolean).join(' &middot; ') || '—'}</span>
+            <span><strong>Banca:</strong> ${[item.revisor1, item.revisor2].filter(Boolean).join(' · ') || '—'}</span>
           </div>
-          ${ (item.media_total ?? item.nota_orientador ?? item.nota_revisor1 ?? item.nota_revisor2) !== undefined ? `
+          ${(item.media_total ?? item.nota_orientador ?? item.nota_revisor1 ?? item.nota_revisor2) !== undefined ? `
           <div class="meta" style="margin-top:.35rem">
             <span><strong>Média:</strong> ${item.media_total ?? '—'}</span>
             <span><strong>Notas:</strong> O ${item.nota_orientador ?? '—'} · R1 ${item.nota_revisor1 ?? '—'} · R2 ${item.nota_revisor2 ?? '—'}</span>
@@ -55,44 +63,44 @@
     cont.appendChild(frag);
   }
 
-  function currentList(){
+  function currentList() {
     const raw = window.TCC_DATA?.datas?.[state.date] || [];
     const q = normalize(state.q);
-    if(!q) return raw;
+    if (!q) return raw;
     return raw.filter(it => {
-      const hay = [it.aluno, it.titulo, it.orientador, it.revisor1, it.revisor2].map(normalize).join(' ');
+      const hay = [it.aluno, it.titulo, it.orientador, it.revisor1, it.revisor2]
+        .map(normalize).join(' ');
       return hay.includes(q);
     });
   }
 
-  function update(){
-    // hydrate date options
+  function update() {
+    // hidrata o seletor de datas uma única vez
     const sel = $('#dateFilter');
-    if(!state.date){
-      const dates = Object.keys(window.TCC_DATA?.datas || {}).sort((a,b)=>{
-        const [da,ma,ya] = a.split('/').map(Number);
-        const [db,mb,yb] = b.split('/').map(Number);
-        return new Date(ya,ma-1,da) - new Date(yb,mb-1,db);
+    if (sel && !state.date) {
+      const dates = Object.keys(window.TCC_DATA?.datas || {}).sort((a, b) => {
+        const [da, ma, ya] = a.split('/').map(Number);
+        const [db, mb, yb] = b.split('/').map(Number);
+        return new Date(ya, ma - 1, da) - new Date(yb, mb - 1, db);
       });
       sel.innerHTML = dates.map(d => `<option value="${d}">${d}</option>`).join('');
       state.date = dates[0] || null;
-      sel.value = state.date;
+      sel.value = state.date || '';
     }
+
     const list = currentList();
     renderStats(list);
     renderCards(list);
   }
 
-  function initControls(){
-    $('#dateFilter').addEventListener('change', () => {
-      state.date = $('#dateFilter').value;
-      update();
-    });
-    $('#searchBox').addEventListener('input', (e) => {
-      state.q = e.target.value;
-      update();
-    });
-    $('#exportPdfBtn').addEventListener('click', async () => {
+  function initControls() {
+    const sel = $('#dateFilter');
+    if (sel) sel.addEventListener('change', () => { state.date = sel.value; update(); });
+    const search = $('#searchBox');
+    if (search) search.addEventListener('input', (e) => { state.q = e.target.value; update(); });
+
+    const pdfBtn = $('#exportPdfBtn');
+    if (pdfBtn) pdfBtn.addEventListener('click', async () => {
       const { jsPDF } = window.jspdf;
       const container = document.querySelector('main');
       const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
@@ -121,19 +129,14 @@
           if (position < canvas.height) pdf.addPage();
         }
       }
-      const dateSlug = (state.date || 'tcc').replace(/\//g,'-');
+      const dateSlug = (state.date || 'tcc').replace(/\//g, '-');
       pdf.save(`programacao_tcc_${dateSlug}.pdf`);
     });
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    initControls();
-    update();
-  });
-
-  function boot(){
+  // só inicia quando o data.js estiver disponível
+  function boot() {
     if (!window.TCC_DATA || !window.TCC_DATA.datas) {
-      // tenta de novo em 100ms até data.js estar carregado
       setTimeout(boot, 100);
       return;
     }
@@ -142,5 +145,4 @@
   }
 
   document.addEventListener('DOMContentLoaded', boot);
-  
 })();
