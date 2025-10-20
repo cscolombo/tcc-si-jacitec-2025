@@ -1,107 +1,138 @@
+// script.js — Dashboard JACITEC (sem notas) + banca “humana”
+// - datas: DD/MM/AAAA no seletor (mesmo se vier 22_10_2025.csv)
+// - banca: 1 -> "A", 2 -> "A e B", 3 -> "A, B e C"
+// - robusto a campos ausentes
+
 (function () {
   const $ = (sel, el = document) => el.querySelector(sel);
-  const safe = (el) => ({ set text(v){ if(el) el.textContent = v; } });
+  const safe = (el) => ({ set text(v) { if (el) el.textContent = v; } });
 
   const state = { date: null, q: '' };
-  const normalize = (s) => (s||'').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'');
 
-  function renderStats(list){
+  const normalize = (s) =>
+    (s || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+
+  const prettyDate = (label) => {
+    const m = String(label || '').match(/^(\d{1,2})_(\d{1,2})_(\d{4})(?:\.csv)?$/i);
+    if (m) return `${m[1].padStart(2, '0')}/${m[2].padStart(2, '0')}/${m[3]}`;
+    const m2 = String(label || '').match(/^(\d{1,2})[^\d](\d{1,2})[^\d](\d{4})$/);
+    if (m2) return `${m2[1].padStart(2, '0')}/${m2[2].padStart(2, '0')}/${m2[3]}`;
+    return label;
+  };
+
+  // Junta nomes de forma “humana”
+  function joinHuman(arr) {
+    const list = (arr || []).filter(Boolean);
+    if (list.length === 0) return '';
+    if (list.length === 1) return list[0];
+    if (list.length === 2) return `${list[0]} e ${list[1]}`;
+    // 3 ou mais (se um dia vier)
+    return `${list.slice(0, -1).join(', ')} e ${list[list.length - 1]}`;
+  }
+
+  function renderStats(list) {
     safe($('#totalCount')).text = String(list.length);
-    if(list.length){
-      const times = list.map(x=>x.hora).filter(Boolean).sort();
-      safe($('#timeSpan')).text = `${times[0]} – ${times[times.length-1]}`;
-      const advisors = new Set(list.map(x=>x.orientador).filter(Boolean));
+    if (list.length) {
+      const times = list.map(x => x.hora).filter(Boolean).sort();
+      safe($('#timeSpan')).text = `${times[0]} – ${times[times.length - 1]}`;
+      const advisors = new Set(list.map(x => x.orientador).filter(Boolean));
       safe($('#advisorCount')).text = String(advisors.size);
-    }else{
+    } else {
       safe($('#timeSpan')).text = '—';
       safe($('#advisorCount')).text = '0';
     }
     safe($('#generatedAt')).text = (window.TCC_DATA?.gerado_em || '—');
   }
 
-  function renderCards(list){
+  function renderCards(list) {
     const cont = $('#scheduleContainer');
-    if(!cont) return;
+    if (!cont) return;
     cont.innerHTML = '';
     const empty = $('#emptyState');
-    if(!list.length){ if(empty) empty.classList.remove('hide'); return; }
-    if(empty) empty.classList.add('hide');
+
+    if (!list.length) {
+      if (empty) empty.classList.remove('hide');
+      return;
+    }
+    if (empty) empty.classList.add('hide');
 
     const frag = document.createDocumentFragment();
     list.forEach(item => {
+      const banca = joinHuman([item.revisor1, item.revisor2]);
       const card = document.createElement('article');
       card.className = 'session';
       card.innerHTML = `
         <div class="time">
           <div>${item.hora || '—:—'}</div>
-          <div class="badge">${state.date}</div>
+          <div class="badge">${prettyDate(state.date)}</div>
         </div>
         <div class="details">
           <h3 class="title">${item.titulo || 'Título não informado'}</h3>
           <div class="meta">
             <span><strong>Aluno(a):</strong> ${item.aluno || '—'}</span>
             <span><strong>Orientador(a):</strong> ${item.orientador || '—'}</span>
-            <!--
-            <span><strong>Banca:</strong> ${[item.revisor1,item.revisor2].filter(Boolean).join(' · ') || '—'}</span>
-            -->
-            <span><strong>Banca:</strong> ${
-              (() => {
-                const banca = [item.revisor1, item.revisor2].filter(Boolean);
-                if (banca.length === 2) return banca.join(' e ');
-                return banca.join('');
-              )() || '—'
-            }</span>
-
+            <span><strong>Banca:</strong> ${banca || '—'}</span>
           </div>
-        </div>`;
+        </div>
+      `;
       frag.appendChild(card);
     });
     cont.appendChild(frag);
   }
 
-  function currentList(){
+  function currentList() {
     const raw = window.TCC_DATA?.datas?.[state.date] || [];
     const q = normalize(state.q);
-    if(!q) return raw;
+    if (!q) return raw;
     return raw.filter(it => {
-      const hay = [it.aluno, it.titulo, it.orientador, it.revisor1, it.revisor2].map(normalize).join(' ');
+      const hay = [it.aluno, it.titulo, it.orientador, it.revisor1, it.revisor2]
+        .map(normalize).join(' ');
       return hay.includes(q);
     });
   }
 
-  function update(){
+  function update() {
     const sel = $('#dateFilter');
-    if(sel && !state.date){
-      const dates = Object.keys(window.TCC_DATA?.datas || {}).sort((a,b)=>{
-        const [da,ma,ya] = a.split('/').map(Number);
-        const [db,mb,yb] = b.split('/').map(Number);
-        return new Date(ya,ma-1,da) - new Date(yb,mb-1,db);
+    if (sel && !state.date) {
+      // Ordena datas por valor cronológico
+      const dates = Object.keys(window.TCC_DATA?.datas || {}).sort((a, b) => {
+        const A = prettyDate(a), B = prettyDate(b);
+        const [da, ma, ya] = A.split('/').map(Number);
+        const [db, mb, yb] = B.split('/').map(Number);
+        return new Date(ya, ma - 1, da) - new Date(yb, mb - 1, db);
       });
-      sel.innerHTML = dates.map(d=>`<option value="${d}">${d}</option>`).join('');
+      sel.innerHTML = dates.map(d => {
+        const shown = prettyDate(d);
+        return `<option value="${d}">${shown}</option>`;
+      }).join('');
       state.date = dates[0] || null;
       sel.value = state.date || '';
     }
+
     const list = currentList();
     renderStats(list);
     renderCards(list);
   }
 
-  function initControls(){
+  function initControls() {
     const sel = $('#dateFilter');
-    if(sel) sel.addEventListener('change', ()=>{ state.date = sel.value; update(); });
+    if (sel) sel.addEventListener('change', () => { state.date = sel.value; update(); });
+
     const search = $('#searchBox');
-    if(search) search.addEventListener('input', e=>{ state.q = e.target.value; update(); });
+    if (search) search.addEventListener('input', (e) => { state.q = e.target.value; update(); });
+
     const pdfBtn = $('#exportPdfBtn');
-    if(pdfBtn) pdfBtn.addEventListener('click', async () => {
+    if (pdfBtn) pdfBtn.addEventListener('click', async () => {
       const { jsPDF } = window.jspdf;
       const container = document.querySelector('main');
       const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p','pt','a4');
+      const pdf = new jsPDF('p', 'pt', 'a4');
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
       const imgWidth = pageWidth - 40;
       const imgHeight = canvas.height * imgWidth / canvas.width;
+
       if (imgHeight <= pageHeight - 40) {
         pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight);
       } else {
@@ -120,17 +151,18 @@
           if (position < canvas.height) pdf.addPage();
         }
       }
-      const dateSlug = (state.date || 'tcc').replace(/\//g,'-');
+      const dateSlug = (prettyDate(state.date) || 'tcc').replace(/\//g, '-');
       pdf.save(`programacao_tcc_${dateSlug}.pdf`);
     });
   }
 
-  function boot(){
-    if(!window.TCC_DATA || !window.TCC_DATA.datas){
+  function boot() {
+    if (!window.TCC_DATA || !window.TCC_DATA.datas) {
       setTimeout(boot, 80);
       return;
     }
-    initControls(); update();
+    initControls();
+    update();
   }
 
   document.addEventListener('DOMContentLoaded', boot);
