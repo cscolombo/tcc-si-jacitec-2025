@@ -1,4 +1,8 @@
 name: Build data.js from CSVs
+
+permissions:
+  contents: write
+
 on:
   push:
     paths:
