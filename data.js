@@ -8,7 +8,7 @@ window.TCC_DATA = {
         "titulo": "Uma Proposta de Ontologia no Domínio do Câncer \nde mama com enfoque nos fatores de risco",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
-        "revisor2": null
+        "revisor2": "Jaimel"
       },
       {
         "data": "22/10/2025",
@@ -17,7 +17,7 @@ window.TCC_DATA = {
         "titulo": "Automação do Acesso a Informações de \nMedicamentos: Proposta de um Chatbot Baseado \nem Evidências Científicas",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
-        "revisor2": null
+        "revisor2": "Jaimel"
       },
       {
         "data": "22/10/2025",
@@ -26,13 +26,13 @@ window.TCC_DATA = {
         "titulo": "Geração Automática de Questões para Certificação \nde Árbitros de Triathlon com Processamento de \nLinguagem Natural: Um Estudo Aplicado ao \nRegulamento da World Triathlon",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
-        "revisor2": null
+        "revisor2": "Jaimel"
       },
       {
         "data": "22/10/2025",
         "hora": "10:00",
         "aluno": "Bianca da Silva Rodrigues",
-        "titulo": "Linguagem Natural: Um Estudo Aplicado ao Regulamento da World Triathlon",
+        "titulo": "Uso de Machine Learning na Identificação de Cáries",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
         "revisor2": null
@@ -127,7 +127,7 @@ window.TCC_DATA = {
         "titulo": "Aplicação de Rag na Consulta de Editais dos \nCursos Técnicos Integrados ao Ensino Médio do \nIfes - Campus Cachoeiro de Itapemirim",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
-        "revisor2": null
+        "revisor2": "Jaimel"
       },
       {
         "data": "23/10/2025",
@@ -203,5 +203,5 @@ window.TCC_DATA = {
       }
     ]
   },
-  "gerado_em": "2025-10-20 22:54:57"
+  "gerado_em": "2025-10-20 23:17:13"
 };
