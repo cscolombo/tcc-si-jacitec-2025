@@ -22,8 +22,8 @@ window.TCC_DATA = {
       {
         "data": "22/10/2025",
         "hora": "09:30",
-        "aluno": "Yuri Pessanha Ribeiro Gomes Carneiro",
-        "titulo": "Geração Automática de Questões para Certificação \nde Árbitros de Triathlon com Processamento de \nLinguagem Natural: Um Estudo Aplicado ao \nRegulamento da World Triathlon",
+        "aluno": "Matheus Cardoso",
+        "titulo": "Um Bulário Baseado em Evidências",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
         "revisor2": "Jaimel"
@@ -35,16 +35,16 @@ window.TCC_DATA = {
         "titulo": "Uso de Machine Learning na Identificação de Cáries",
         "orientador": "Cristiano",
         "revisor1": "Flavio",
-        "revisor2": null
+        "revisor2": "Jaimel"
       },
       {
         "data": "22/10/2025",
         "hora": "10:30",
-        "aluno": "Cristiano",
-        "titulo": "A definir",
+        "aluno": "Yuri Pessanha Ribeiro Gomes Carneiro",
+        "titulo": "Geração Automática de Questões para Certificação \nde Árbitros de Triathlon com Processamento de \nLinguagem Natural: Um Estudo Aplicado ao \nRegulamento da World Triathlon",
         "orientador": "Cristiano",
-        "revisor1": "Cristiano",
-        "revisor2": null
+        "revisor1": "Flavio",
+        "revisor2": "Jaimel"
       },
       {
         "data": "22/10/2025",
@@ -61,7 +61,7 @@ window.TCC_DATA = {
         "aluno": "Pedro Gomes",
         "titulo": "GERENCIADOR DE EFICIÊNCIA DE PRODUÇÃO EM PLACAS SOLARES COM SOLUÇÃO BLOCKCHAIN PARA NEGOCIAÇÃO DE EXCEDENTES",
         "orientador": "João Paulo",
-        "revisor1": null,
+        "revisor1": "Flavio",
         "revisor2": null
       },
       {
@@ -198,10 +198,10 @@ window.TCC_DATA = {
         "aluno": "Marcelo",
         "titulo": null,
         "orientador": "Susana",
-        "revisor1": "Emanoel",
+        "revisor1": null,
         "revisor2": "Bruno"
       }
     ]
   },
-  "gerado_em": "2025-10-20 23:17:13"
+  "gerado_em": "2025-10-21 21:29:08"
 };
