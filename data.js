@@ -48,29 +48,29 @@ window.TCC_DATA = {
       },
       {
         "data": "22/10/2025",
-        "hora": "11:00",
-        "aluno": "Helio  Breda Netto",
-        "titulo": "Rastreamento  de Cadeia de Suprimentos Agricolas Usando a Tecnologia Blockchain",
-        "orientador": "João Paulo",
-        "revisor1": null,
-        "revisor2": null
-      },
-      {
-        "data": "22/10/2025",
         "hora": "11:30",
         "aluno": "Pedro Gomes",
         "titulo": "GERENCIADOR DE EFICIÊNCIA DE PRODUÇÃO EM PLACAS SOLARES COM SOLUÇÃO BLOCKCHAIN PARA NEGOCIAÇÃO DE EXCEDENTES",
         "orientador": "João Paulo",
         "revisor1": "Flavio",
+        "revisor2": "Everson"
+      },
+      {
+        "data": "22/10/2025",
+        "hora": "13:30",
+        "aluno": "Pedro Henrique Braido",
+        "titulo": "UMA SOLUÇÃO PARA AUXILIAR NA MOBILIDADE URBANA - SISTEMA DE CARONAS INTEGRADO COM BLOCKCHAIN",
+        "orientador": "João Paulo",
+        "revisor1": "Rafael V",
         "revisor2": null
       },
       {
         "data": "22/10/2025",
-        "hora": "12:00",
-        "aluno": "Pedro Henrique Braido",
-        "titulo": "UMA SOLUÇÃO PARA AUXILIAR NA MOBILIDADE URBANA - SISTEMA DE CARONAS INTEGRADO COM BLOCKCHAIN",
+        "hora": "14:00",
+        "aluno": "Helio Breda Netto",
+        "titulo": "Rastreamento  de Cadeia de Suprimentos Agricolas Usando a Tecnologia Blockchain",
         "orientador": "João Paulo",
-        "revisor1": null,
+        "revisor1": "Rafael V",
         "revisor2": null
       },
       {
@@ -172,7 +172,7 @@ window.TCC_DATA = {
         "titulo": "REDES NEURAIS CONVOLUCIONAIS PARA SEGMENTAÇÃO E CLASSIFICAÇÃO DE ROCHAS ORNAMENTAIS",
         "orientador": "Rafael G",
         "revisor1": "Juliano",
-        "revisor2": null
+        "revisor2": "Cristiano"
       },
       {
         "data": "23/10/2025",
@@ -181,7 +181,7 @@ window.TCC_DATA = {
         "titulo": "COMPARAÇÃO DOS PLANOS DE DADOS P4EMU E XDP DO SOFTWARE SWITCH\nFREERTR PARA REDES DEFINIDAS POR SOFTWARE (SDN)",
         "orientador": "Everson",
         "revisor1": "Rafael G",
-        "revisor2": null
+        "revisor2": "Bruno"
       },
       {
         "data": "23/10/2025",
@@ -203,5 +203,5 @@ window.TCC_DATA = {
       }
     ]
   },
-  "gerado_em": "2025-10-21 21:29:08"
+  "gerado_em": "2025-10-23 14:50:39"
 };
